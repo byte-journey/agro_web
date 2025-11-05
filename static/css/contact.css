@@ -1,0 +1,211 @@
+/* HERO */
+.contact-hero {
+  position: relative;
+  overflow: visible;                  /* allow overlay to show */
+  background: linear-gradient(90deg,#163821,#2c7744);
+  color: #fff;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* inner spacing so overlay won't collide with content on small screens */
+.contact-hero .hero-inner { 
+  position: relative;
+  z-index: 1;
+  padding-top: 3.25rem;
+  padding-bottom: 4rem;    /* leave visual room for overlay */
+}
+
+/* hero text */
+.contact-hero .hero-text h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  margin-bottom: .25rem;
+}
+
+/* Hero illustrations wrapper (keeps them together) */
+.hero-illustrations {
+  position: relative;
+  width: 260px;           /* visual container width for the two svgs */
+  height: 260px;
+  flex-shrink: 0;
+  z-index: 0;             /* sits behind overlay cards, but above background */
+}
+
+/* shared illustration styles */
+.hero-illu {
+  position: absolute;
+  width: 140px;          /* base width; adjusts with media queries below */
+  height: auto;
+  display: block;
+  filter: none;
+  opacity: 0.98;
+  transition: transform .25s ease;
+  will-change: transform;
+  user-select: none;
+}
+
+/* top image - shifted up/left a bit */
+.hero-illu.top-illu {
+  top: 8%;
+  left: -10%;
+  transform: translateY(0%) rotate(0deg);
+}
+
+/* bottom image - shifted down/right a bit and not vertically inline */
+.hero-illu.bottom-illu {
+  bottom: 6%;
+  right: 6%;
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Ensure there is a reasonable gap and they don't overlap */
+.hero-illu.top-illu,
+.hero-illu.bottom-illu {
+  box-shadow: none;
+}
+
+/* Overlay container: sits visually overlapping bottom of hero */
+.contact-overlay-wrapper {
+  margin-top: -6rem;        /* Pulls cards UP into hero */
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* neutralize bootstrap negative margins effect inside our overlay row */
+.contact-overlay .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Constrain overlay inner width */
+.contact-overlay-wrapper .container {
+  max-width: 1100px;
+}
+
+/* individual cards */
+.contact-card {
+  border-radius: 0.85rem;
+  padding: 1.1rem;
+  background: #ffffff;
+  color: #222;
+  box-shadow: 0 10px 30px rgba(11, 24, 30, 0.08);
+  border: none;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* center the SVG in the card */
+contact-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  margin-bottom: 1rem;
+  background: rgba(44, 119, 68, 0.08);
+  color: #2c7744;
+  border-radius: 15px;
+  transition: all 0.25s ease;
+  padding: 0.5rem;
+}
+
+.contact-card .btn,
+.contact-card a:not(.btn) {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.contact-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: visible !important;   /* Critical: allows shadow to show */
+  position: relative;             /* Needed for z-index stacking */
+  z-index: 1;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 45px rgba(11, 24, 30, 0.18) !important;
+  z-index: 10;
+}
+
+.contact-card:hover .contact-card-icon {
+  transform: scale(1.1);
+  background: rgba(44, 119, 68, 0.15) !important;
+  transition: all 0.25s ease;
+}
+
+.contact-card:hover h5,
+.contact-card:hover p {
+  color: #2c7744 !important;
+}
+
+.contact-card:hover a {
+    background-color: #ffffff !important;
+    color: #166be1;
+    transition: all 0.5s ease;
+}
+
+.map-location {
+    margin-top: 4rem;
+}
+
+/* contact.css – add these two rules */
+.map-location .ratio {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.map-location .container {
+    max-width: 1300px;      /* makes the map wider on large screens */
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
+/* Medium screens (tablets) */
+@media (max-width: 1199.98px) and (min-width: 768px) {
+  .contact-overlay-wrapper {
+    margin-top: -5rem;
+  }
+}
+
+
+/* Small screens / mobile */
+@media (max-width: 767.98px) {
+  .contact-overlay-wrapper {
+    margin-top: -3rem;      /* Less overlap on mobile */
+  }
+
+  .contact-card {
+    padding: 0.75rem 0.5rem;
+    min-height: auto;
+  }
+}
+
+/* medium screens: slightly smaller overlap */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .contact-overlay-wrapper {
+    margin-top: -5rem;
+  }
+}
+
+/* Very large screens - a bit more overlap */
+@media (min-width: 1200px) {
+  .contact-overlay-wrapper {
+    margin-top: -7rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480.98px) {
+  .contact-overlay-wrapper {
+    margin-top: -6rem;
+  }
+
+  .hero-illustrations .hero-illu {
+    width: 8rem;
+    height: 8rem;
+  }
+}

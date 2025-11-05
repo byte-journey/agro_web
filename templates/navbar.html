@@ -1,0 +1,98 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2c7744;">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'images/RockFarmsLogo.png' %}" alt="Rock Farms" class="d-inline-block align-top" style="height: 60px;">
+    </a>
+
+    <!-- Mobile Menu Toggle (Hamburger) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Desktop Nav Links (Centered) -->
+    <div class="collapse navbar-collapse" id="desktopNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item px-2">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link {% if '/shop/' in request.path %}active{% endif %}" href="{% url 'shop' %}">Shop</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link {% if '/contact/' in request.path %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Desktop Right Icons -->
+      <div class="d-flex align-items-center">
+        <button class="btn btn-link text-white me-3" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <i class="d-none bi bi-search fs-4"></i>
+        </button>
+        <a href="{% url 'wishlist' %}" id="wishlist-btn" class="btn btn-link text-white position-relative">
+          <i class="bi bi-heart fs-4"></i>
+          <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger d-none" id="wishlist-count"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== MOBILE OFFCANVAS MENU ==================== -->
+<div class="offcanvas offcanvas-start text-white" 
+      style="background-color: #2c7744f1;"
+      data-bs-backdrop="false" 
+      tabindex="-1" 
+      id="mobileMenu">
+  <div class="offcanvas-header border-bottom border-light border-opacity-25">
+    <div class="d-flex align-items-center w-100 justify-content-between">
+      <!-- Search & Wishlist on Top -->
+      <div class="d-flex gap-3">
+        <button class="d-none btn btn-link text-white p-0" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <i class="bi bi-search fs-4"></i>
+        </button>
+        <a href="{% url 'wishlist' %}" class="btn btn-link text-white position-relative p-0">
+          <i class="bi bi-heart fs-4"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="wishlist-count-mobile"></span>
+        </a>
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="offcanvas-body p-0">
+    <ul class="list-group list-group-flush">
+      <a href="/" class="list-group-item list-group-item-action bg-transparent text-white py-3 px-4 d-flex align-items-center {% if request.path == '/' %}active{% endif %}">
+        <i class="bi bi-house me-3 fs-5"></i> Home
+      </a>
+      <a href="{% url 'shop' %}" class="list-group-item list-group-item-action bg-transparent text-white py-3 px-4 d-flex align-items-center {% if '/shop/' in request.path %}active{% endif %}">
+        <i class="bi bi-shop me-3 fs-5"></i> Shop
+      </a>
+      <a href="{% url 'contact' %}" class="list-group-item list-group-item-action bg-transparent text-white py-3 px-4 d-flex align-items-center {% if '/contact/' in request.path %}active{% endif %}">
+        <i class="bi bi-envelope me-3 fs-5"></i> Contact
+      </a>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SEARCH MODAL (unchanged) ==================== -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Search Products</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'search' %}" method="get">
+          <div class="input-group">
+            <input type="search" name="q" class="form-control" placeholder="Search for livestock, tools..." aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

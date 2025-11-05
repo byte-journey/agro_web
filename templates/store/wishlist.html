@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+  <h3>Your Wishlist</h3>
+  <div id="wishlist-grid" class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
+    <!-- Wishlist items will appear here -->
+  </div>
+  <div id="empty-msg" class="text-muted mt-4">You have no items in your wishlist.</div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const KEY = "rockFarmsWishlist";
+    const wishlist = JSON.parse(localStorage.getItem(KEY) || "[]");
+    const grid = document.getElementById("wishlist-grid");
+    const emptyMsg = document.getElementById("empty-msg");
+
+    if (wishlist.length === 0) return;
+
+    emptyMsg.style.display = "none";
+
+    wishlist.forEach(productId => {
+      fetch(`/api/product/${productId}/`)
+        .then(res => res.json())
+        .then(data => {
+          const card = document.createElement("div");
+          card.className = "col";
+          card.innerHTML = `
+            <div class="card h-100 product-card">
+              <img src="${data.image}" class="card-img-top" alt="${data.name}">
+              <div class="card-body">
+                <h6 class="card-title">${data.name}</h6>
+                <p class="card-text">${data.price_display}</p>
+                <a href="/product/${data.slug}/" class="btn btn-sm btn-success">View</a>
+              </div>
+            </div>`;
+          grid.appendChild(card);
+        });
+    });
+  });
+</script>
+
+{% endblock %}

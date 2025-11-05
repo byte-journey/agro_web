@@ -1,0 +1,616 @@
+/* ========== BASE STYLES ========== */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #333;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  padding: 0.5rem 0; /* Reduced padding for a sleeker look */
+  background-color: #2c7744 !important;
+  transition: all 0.3s ease;
+}
+
+/* Navbar becomes slightly opaque when scrolled */
+.navbar.scrolled {
+  background-color: rgba(44, 119, 68, 0.95) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* Center the nav items perfectly */
+.navbar-nav {
+  font-weight: 500; /* Slightly bolder font */
+}
+
+/* Active link styling */
+.nav-link.active {
+  position: relative;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Action buttons styling */
+.navbar .btn-link {
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.navbar .btn-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.navbar-brand img {
+  height: 80px; /* Or whatever size you want */
+  max-height: 100px;
+  object-fit: contain;
+  margin: -15px;
+  padding: -20px;
+}
+
+/* Cart badge animation */
+.badge {
+  transition: all 0.3s ease;
+  font-size: 0.6rem;
+  min-width: 18px;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-top: 8px;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.5rem;
+}
+
+/* =========== FOOTER SECTION =========== */
+footer.footer-section {
+  background-color: #2c7744 !important;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+  color: #c2ffd2;
+}
+
+.footer-bottom {
+  background-color: #245f38 !important;
+}
+
+.footer-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.footer-toggle:focus {
+  outline: none;
+}
+
+/* Footer headings like "Customer Service", "About Us" */
+.custom-footer h5 {
+  font-family: 'Poppins', sans-serif;  /* or your preferred modern font */
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #f1f1f1;  /* slightly off-white for contrast */
+}
+
+/* Footer labels like "Service Hours:" */
+.custom-footer p.small.mb-1 {
+  color: #cccccc;  /* muted gray for less important text */
+  font-size: 0.9rem;
+}
+
+/* Footer content text like "Monday - Friday..." */
+.custom-footer p.small:not(.mb-1) {
+  color: #ffffff;  /* brighter white for emphasis */
+  font-size: 0.95rem;
+}
+
+/* Footer links */
+.custom-footer a {
+  color: #ffffff;  /* brighter white */
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+}
+
+.custom-footer a:hover {
+  color: #00cc66;  /* highlight color on hover */
+  text-decoration: underline;
+}
+
+/* Mobile Menu Active State */
+#mobileMenu .list-group-item.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  font-weight: 600;
+}
+
+/* Smooth transition */
+.offcanvas {
+  transition: transform 0.3s ease-in-out;
+}
+
+#mobileMenu {
+  width: 300px !important;
+  max-width: 70vw !important;  /* Never wider than screen */
+}
+
+/* Transparent background with glass effect */
+#mobileMenu {
+  width: 350px !important;
+  max-width: 90vw !important;
+  background: rgba(44, 119, 68, 0.92) !important;  /* 92% opaque green */
+  backdrop-filter: blur(10px);                     /* Glass blur */
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Larger, bolder menu items */
+#mobileMenu .list-group-item {
+  font-size: 1.25rem !important;      /* Bigger text */
+  font-weight: 500;
+  padding: 1rem 1.5rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#mobileMenu .list-group-item i {
+  font-size: 1.4rem;
+  width: 32px;
+}
+
+/* Active state – more visible */
+#mobileMenu .list-group-item.active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  font-weight: 600;
+  border-left: 4px solid white;
+}
+
+/* Top icons (Search & Wishlist) – larger */
+#mobileMenu .offcanvas-header .btn-link {
+  font-size: 1.5rem;
+}
+
+
+
+/* =============== Responsive Layouts ===============*/
+
+
+@media (min-width: 768px) {
+  .footer-toggle {
+    display: none;
+  }
+}
+
+
+/* =========== FLOAT BUTTONS ============ */
+.fab-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.fab-main {
+  background-color: #ff0000;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.fab-options {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fab-options.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fab-option {
+  margin: 8px 0;
+  width: 48px;
+  height: 48px;
+  background-color: #2c7744;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(0.8);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.fab-options.show .fab-option {
+  transform: scale(1);
+}
+
+.fab-option:hover {
+  transform: scale(1.1);
+}
+
+.fab-option.whatsapp {
+  background-color: #25D366;
+}
+
+.fab-option.location {
+  background-color: #007bff;
+}
+
+/* ======== BACK TO TOP ========= */
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 90px;
+  z-index: 998;
+  display: none;
+  background-color: #2c7744;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#backToTopBtn:hover {
+  transform: scale(1.1);
+}
+
+
+
+/* ========== HERO SECTION ========== */
+
+.hero-carousel {
+  position: relative;
+}
+
+.hero-carousel .carousel-item {
+  height: 90vh; /* Full viewport height */
+  min-height: 500px;
+  max-height: 800px;
+}
+
+.hero-carousel .carousel-item img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  filter: brightness(0.6); /* Darken image for better text contrast */
+}
+
+.hero-carousel .carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.hero-carousel h1 {
+  font-size: 3.5rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  margin-bottom: 1.5rem;
+}
+
+.hero-carousel .lead {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
+}
+
+/* Carousel controls styling */
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(44, 119, 68, 0.8);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.hero-carousel .carousel-control-prev {
+  left: 5px;
+}
+
+.hero-carousel .carousel-control-next {
+  right: 5px;
+}
+
+.hero-carousel .carousel-control-prev-icon,
+.hero-carousel .carousel-control-next-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: 100% 100%;
+  filter: brightness(0) invert(1);
+}
+
+/* Carousel indicators */
+.hero-carousel .carousel-indicators button {
+  width: 50px;
+  height: 5px;
+  border-radius: 10px;
+  border: 0.5px solid white;
+  background-color: transparent;
+}
+
+.hero-carousel .carousel-indicators button.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* Shop Page Search Blur Overlay Style */
+.blur-sm {
+  filter: blur(2px);
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 992px) {
+  .hero-carousel h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-carousel .lead {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel .carousel-item {
+    height: 70vh;
+    min-height: 400px;
+  }
+  
+  .hero-carousel h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-carousel .lead {
+    font-size: 1.1rem;
+  }
+  
+  .hero-carousel .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-carousel .carousel-caption {
+    padding: 0 0.5rem;
+  }
+  
+  .hero-carousel h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-carousel .btn {
+    display: block;
+    width: 80%;
+    margin: 0.5rem auto;
+  }
+}
+
+
+
+/* ========== FEATURES SECTION ========== */
+.features-section {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  background-color: white;
+}
+
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.feature-card h3 {
+  color: #2c7744;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+}
+
+
+/* ============= PRODUCTS VIEW SECTION */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+/* Horizontal scroll styling */
+.scrolling-wrapper {
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.card-img-top {
+  height: 300px;
+  background-size: contain;
+  object-fit: contain;
+}
+
+/* Product card styling */
+.product-card {
+  scroll-snap-align: start;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+  padding: 1.5px;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: limit image height to avoid stretch */
+.product-card img {
+  height: 160px;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.product-card .card-body h5 {
+  font-size: 15px;
+}
+
+.product-card .card-body p {
+  font-size: 13px;
+}
+
+
+/* ========== CATEGORIES SECTION ========== */
+.category-box {
+  position: relative; /* Make sure we can absolutely position overlays inside */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 5rem;
+  height: 300px;
+  padding: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* Semi-transparent green full-overlay */
+.category-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 20% 20%,  /* top-left where the text starts */
+    rgba(0, 100, 0, 0.45),  /* intense green behind text */
+    rgba(0, 100, 0, 0.1) 50% /* fades outward */
+  );
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+/* Ensure text is above both overlays */
+.category-box h4 {
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* ========== SHOP PAGE ========== */
+
+/* Shop utility bar fixes */
+.shop-utility-bar .breadcrumb a {
+  text-decoration: none;
+}
+.shop-utility-bar input[type="search"]::placeholder {
+  font-size: 0.9rem;
+}
+
+.shop-utility-bar {
+  position: sticky;
+  top: 0px;        /* height of your navbar (adjust if different) */
+  z-index: 1020;    /* above main content, below navbar */
+}
+
+/* Chip buttons wrap cleanly */
+@media (max-width: 575.98px) {
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { /* tablets */
+  .shop-grid-container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+
+/* ========== PRODUCT CARDS ========== */
+.product-card .badge {
+  font-size: 0.65rem;
+  text-transform: capitalize;
+}
+
+
+/*========== CATEGORY SIDEBAR =========== */
+
+
+/* ========== BUTTON EFFECTS ========== */
+
+
+/* ========== CONTACT PAGE ========== */
+
+
+/* ========== LOADING ANIMATION ========== */
+
+
+/* ========== RESPONSIVE ADJUSTMENTS ========== */

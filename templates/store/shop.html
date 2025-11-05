@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} <div class="container py-5">
+  <div class="row g-4">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-6">
+      {% include 'store/partials/product_card.html' %}
+    </div>
+    {% endfor %}
+    <!-- Sidebar with Categories -->
+    <div class="col-md-3">
+      <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+          Categories
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for category in categories %}
+          <li class="list-group-item">
+            <a href="?category={{ category.slug }}" class="text-decoration-none">
+              {{ category.name }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="col-md-9">
+      <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 product-card">
+            <img src="{{ product.image.url }}" class="card-img-top p-3" alt="{{ product.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <h6 class="text-success">${{ product.price }}</h6>
+              <p class="small text-muted">In Stock: {{ product.stock }}</p>
+            </div>
+            <div class="card-footer bg-white">
+              <button class="btn btn-success btn-sm w-100">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+<!-- === SHOP UTILITY BAR === -->
+<div class="shop-utility-bar border-bottom py-1 bg-light">
+  <div class="container d-flex flex-column flex-sm-row align-items-md-center gap-2">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="flex-grow-1" style="--bs-breadcrumb-divider: '>';">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+          <a href="{% url 'shop' %}">Shop</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {% if active_category %}{{ active_category.name }}{% else %}All Products{% endif %}
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Search bar + Wishlist -->
+    <div class="d-flex flex-grow-2 flex-sm-grow-0 align-items-center gap-2 w-50 w-md-50 w-lg-25">
+      <form class="d-flex flex-grow-1" action="{% url 'search' %}" method="get" role="search">
+        <input id="live-search" class="form-control me-2" type="search" name="q" placeholder="Search products…" aria-label="Search">
+        <button class="btn btn-outline-success d-none" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      <!-- Wishlist / favourites icon -->
+      <!--<a href="#" id="wishlist-btn" class="btn btn-outline-secondary position-relative">
+        <i class="bi bi-heart"></i>
+        <span 
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+            id="wishlist-count"></span>
+      </a>-->
+    </div>
+
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row">
+
+    <!-- Sidebar with Categories -->
+    <!--<aside class="col-lg-3 mb-4">
+      <div class="card">
+        <div class="card-header bg-success text-white">Categories</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a href="{% url 'shop' %}" class="text-decoration-none {% if not selected_category %}fw-bold text-success{% endif %}">
+              All Products
+            </a>
+          </li>
+          {% for category in categories %}
+          <li class="list-group-item">
+            <a href="{% url 'category-view' category.slug %}"
+                class="text-decoration-none {% if active_category and active_category.slug == category.slug %}fw-bold text-success{% endif %}">
+              {{ category.name }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>-->
+
+    <!-- Product Grid -->
+    <div class="col-12">
+      <!-- === INFO ROW === -->
+      <!--<div class="d-flex flex-column flex-md-row align-items-md-center mb-3 gap-2">-->
+      <div class="row gy-5 align-items-center mb-3">
+
+        <!-- Category / Sub‑category label || LEFT-->
+        <div class="col-4">
+          <strong>
+            {% if active_category %}
+              {{ active_category.name }}
+            {% else %}
+              All Products
+            {% endif %}
+          </strong>
+          {# sub‑category will be appended here later #}
+        </div>
+
+        <!-- Product count || MIDDLE-->
+        <div class="col-4 text-center text-muted small">
+          {{ product_count }} product{{ product_count|pluralize }}
+        </div>
+
+        <!-- Sort dropdown || RIGHT-->
+        <div class="col-4 text-end">
+          <form method="get" class="d-inline">
+            {% if active_category %}
+              <input type="hidden" name="category" value="{{ active_category.slug }}">
+            {% endif %}
+            <label class="me-1 small text-muted d-none d-md-inline">Sort:</label>
+            <select name="sort" 
+              class="form-select form-select-sm w-auto d-inline" onchange="this.form.submit()">
+              <option value="newest"     {% if sort_key == 'newest' %}selected{% endif %}>Newest</option>
+              <option value="price-asc"  {% if sort_key == 'price-asc' %}selected{% endif %}>Price: Low–High</option>
+              <option value="price-desc" {% if sort_key == 'price-desc' %}selected{% endif %}>Price: High–Low</option>
+            </select>
+          </form>
+        </div>
+
+      </div>
+
+      {% if subcategories %}
+        <div class="mb-3">
+          <div class="d-flex flex-wrap gap-2">
+
+            {# "All" chip #}
+            <a href="{% url 'category-view' active_category.slug %}"
+              class="btn btn-sm {% if not active_sub %}btn-success{% else %}btn-outline-success{% endif %}">
+              All
+            </a>
+
+            {# chips for each sub‑category #}
+            {% for sc in subcategories %}
+              <a href="{% url 'category-view' active_category.slug %}?sub={{ sc.slug }}{% if sort_key %}&sort={{ sort_key }}{% endif %}"
+                class="btn btn-sm {% if active_sub and active_sub.id == sc.id %}btn-success{% else %}btn-outline-success{% endif %}">
+                {{ sc.name }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+
+      <!-- ===== PRODUCTS COLUMN =====-->
+      <!--<div class="row g-4">-->
+      <div id="product-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
+        {% for product in products %}
+        <div class="col">
+          {% if active_category %}
+            {% include 'store/partials/product_card.html' with show_category_badge=False %}
+          {% else %}
+            {% include 'store/partials/product_card.html' with show_category_badge=True %}
+          {% endif %}
+        </div>
+
+        <!-- Spinner overlay -->
+        <div id="search-spinner-overlay" class="d-none position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-light bg-opacity-50" style="z-index: 10;">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <!-- No results message -->
+        <div id="no-results-msg" class="text-center text-muted mt-4 d-none">
+          <i class="bi bi-emoji-frown fs-4"></i>
+          <p>No products found</p>
+        </div>
+        {% empty %}
+          <p>No products found in this category.</p>
+        {% endfor %}
+      </div>
+
+      <!-- Add the “Load More” button & hidden link -->
+      {% if has_next %}
+        <div class="text-center my-4">
+          <button id="load-more-btn" class="btn btn-outline-success">
+            Load More
+          </button>
+          <a id="next-page-link"
+            href="?page={{ next_page_number }}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.sub %}&sub={{ request.GET.sub }}{% endif %}"
+            class="d-none"></a>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("live-search");
+    const productGrid = document.getElementById("product-grid");
+    const spinnerOverlay = document.getElementById("search-spinner-overlay");
+    const noResultsMsg = document.getElementById("no-results-msg");
+
+    // Debounce logic
+    function debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        spinnerOverlay.classList.remove("d-none"); // Show spinner
+        productGrid.classList.add("blur-sm"); // Blur effect
+        timeout = setTimeout(() => {
+          func.apply(this, args);
+          spinnerOverlay.classList.add("d-none"); // Hide spinner
+          productGrid.classList.remove("blur-sm"); // Remove blur
+        }, delay);
+      };
+    }
+
+    function filterProducts() {
+      const query = searchInput.value.trim().toLowerCase();
+      const productCards = document.querySelectorAll("#product-grid .product-card");
+      let visibleCount = 0;
+
+      productCards.forEach(card => {
+        const name = card.dataset.name;
+        const col = card.closest(".col");
+
+        if (name.startsWith(query) || name.includes(query)) {
+          col.style.display = "block";
+          visibleCount++;
+        } else {
+          col.style.display = "none";
+        }
+      });
+
+      // Show or hide the "No results" message
+      if (visibleCount === 0) {
+        noResultsMsg.classList.remove("d-none");
+      } else {
+        noResultsMsg.classList.add("d-none");
+      }
+    }
+
+    const debouncedFilter = debounce(filterProducts, 300);
+    searchInput.addEventListener("input", debouncedFilter);
+  });
+</script>
+
+{% endblock %}

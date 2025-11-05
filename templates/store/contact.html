@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block head_extra %}
+<!-- Ensure this CSS file is loaded from your base.html or include here -->
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+  <div class="container hero-inner d-flex align-items-center justify-content-between py-5">
+    <div class="hero-text">
+      <h1 class="display-5 fw-bold">Get in touch</h1>
+      <p class="lead mb-0">Want to get in touch? We’d love to hear from you. Here’s how you can reach us.</p>
+    </div>
+
+    <!-- Hero illustrations - positioned within hero -->
+    <div class="hero-illustrations" aria-hidden="true">
+      <img src="{% static 'images/email_b5yu.svg' %}" alt="" class="hero-illu top-illu">
+      <img src="{% static 'images/talking-on-the-phone.svg' %}" alt="" class="hero-illu bottom-illu">
+    </div>
+  </div>
+</section>
+
+<!-- Overlay cards container (overlaps bottom of hero) -->
+<div class="contact-overlay-wrapper" id="contact-cards">
+  <div class="container">
+    <div class="row g-5 justify-content-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="card contact-card text-center p-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-telephone-fill mb-4" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+          </svg>
+          <h5 class="fw-bold mb-2">Talk to Sales</h5>
+          <p class="text-muted mb-3">Interested in our products? Pick up the phone to chat with a member of our sales team.</p>
+          <a href="tel:+233541094973" class="d-inline-block fw-semibold text-decoration-none py-2">+233 541 094 973</a>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="card contact-card text-center p-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-send-fill mb-4" viewBox="0 0 16 16">
+            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+          </svg>
+          <h5 class="fw-bold mb-2">Contact Customer Support</h5>
+          <p class="text-muted mb-3">Do you need any help or advice from? Don’t worry — we’re here for you.</p>
+          <a href="#" class="btn btn-primary">Send us a mail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Google map + location info (HubSpot-like block) ===== -->
+<section class="map-location py-5 bg-white" id="locate-us">
+  <div class="container p-5">
+    <h2 class="text-center fw-bold mb-5">Locate Us</h2>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-md-7">
+          <div class="ratio ratio-16x9 rounded overflow-hidden">
+            <!-- replace src with your coordinates if needed -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d501.9358232647914!2d0.6011586528798839!3d6.022715779562596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sgh!4v1762345343391!5m2!1sen!2sgh"
+              width="150%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <h4 class="fw-bold mb-2">Rock Livestock & Agro Enterprise</h4>
+          <p class="mb-1">Adidome - Sogakope Rd, Sogakope, Gallekope<br>Ghana</p>
+
+          <div class="mt-3">
+            <h6 class="mb-1">Phone</h6>
+            <p class="mb-0">+233 541 094 973</p>
+            {% comment %} <p class="mb-0"><strong>Fax:</strong> +1 617 812 5820</p> {% endcomment %}
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Following sections -->
+<section class="office-info py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Connect with us for business</h2>
+
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6 order-md-2 mb-4 mb-md-0">
+        <img src="{% static 'images/dublin-office.jpg' %}" alt="Dublin Office" class="img-fluid rounded shadow-sm">
+      </div>
+      <div class="col-md-6 order-md-1">
+        <h4 class="fw-bold">Ernesto Farms, Ghana</h4>
+        <p class="mb-1">Our animal farm, Sogakope<br>Sogaokope-Adidome Rd, Gallekope, Sogakope</p>
+        <p><strong>Phone:</strong> +233 541 094 973</p>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="{% static 'images/singapore-office.jpg' %}" alt="Singapore Office" class="img-fluid rounded shadow-sm">
+      </div>
+      <div class="col-md-6">
+        <h4 class="fw-bold">Farm and Agro Enterprise</h4>
+        <p class="mb-1">Sogakope-Adidome Rd, near The Gas Station<br>Sogakope, Awusakpe</p>
+        <p><strong>Phone:</strong> +233 541 094 973</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

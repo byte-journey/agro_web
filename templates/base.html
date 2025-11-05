@@ -1,0 +1,380 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rock Farms</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        {% comment %} Bootstrap Icons {% endcomment %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <!-- Load static files -->
+        <link  rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+        <!-- font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+        </style>
+
+        {% block head_extra %}{% endblock %}
+    </head>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const desktopCount = document.getElementById('wishlist-count');
+            const mobileCount = document.getElementById('wishlist-count-mobile');
+            
+            // Copy count
+            if (desktopCount && mobileCount) {
+            mobileCount.textContent = desktopCount.textContent;
+            mobileCount.classList.toggle('d-none', desktopCount.classList.contains('d-none'));
+            }
+        });
+    </script>
+
+    <body>
+        {% include 'navbar.html'%}
+        <div class="container-fluid mt-1 p-0">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <div class="page-loader">
+            <div class="loader-logo">
+                <img src="{% static 'images/RockFarmsLogo.png' %}" width="80" alt="">
+            </div>
+        </div>
+
+        <style>
+            .page-loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 0.5s, visibility 0.5s;
+            }
+
+            .page-loader.fade-out {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .loader-logo {
+                animation: pulse 1.5s infinite;
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        </style>
+
+        <!--<script>
+            window.addEventListener('load', function() {
+                document.querySelector('.page-loader').classList.add('fade-out');
+            });
+        </script>-->
+
+        <!-- =================== FOOTER =================== -->
+        <footer class="footer-section text-light mt-5 custom-footer">
+            <div class="container py-5">
+                <div class="row">
+
+                <!-- Customer Service -->
+                <div class="col-md-3 mb-4 footer-column">
+                    <button class="footer-toggle d-md-none w-100 text-start" data-bs-toggle="collapse" data-bs-target="#footerCustomer">
+                    Customer Service ▽
+                    </button>
+                    <div class="collapse d-md-block" id="footerCustomer">
+                    <h5 class="d-none d-md-block">Customer Service</h5>
+
+                    <p class="small mb-1">Service Hours:</p>
+                    <p class="small">Monday - Saturday<br>8:30AM to 5:30PM</p>
+
+                    <p class="small mb-1">Phone:</p>
+                    <p class="small">
+                        <a href="tel:+233541094973" class="text-light text-decoration-none"> +233541094973</a>
+                    </p>
+
+                    <p class="small mb-1">Email:</p>
+                    <p class="small">
+                        <a href="mailto:yes@yes.com" class="text-light text-decoration-none">yes@yes.com</a>
+                    </p>
+
+                    <p class="small mb-1">WhatsApp:</p>
+                    <p class="small">
+                        <a href="https://wa.me/233541094973" target="_blank" class="text-light text-decoration-none">+233 541 094 973</a>
+                    </p>
+                    </div>
+                </div>
+
+                <!-- About Us -->
+                <div class="col-md-3 mb-4 footer-column">
+                    <button class="footer-toggle d-md-none w-100 text-start" data-bs-toggle="collapse" data-bs-target="#footerAbout">
+                    About Us ▽
+                    </button>
+                    <div class="collapse d-md-block" id="footerAbout">
+                    <h5 class="d-none d-md-block">About Us</h5>
+                    <p class="small mb-1">
+                        <a href="{% url 'contact' %}#locate-us" class="text-light text-decoration-none">Locate us</a>
+                    </p>
+                    <p class="small mb-0">
+                        <a href="#" class="text-light text-decoration-none">About us</a>
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="col-md-3 mb-4 footer-column">
+                    <button class="footer-toggle d-md-none w-100 text-start" data-bs-toggle="collapse" data-bs-target="#footerTerms">
+                    Terms ▽
+                    </button>
+                    <div class="collapse d-md-block" id="footerTerms">
+                    <h5 class="d-none d-md-block">Terms</h5>
+                    {% comment %} <p class="small mb-1">
+                        <a href="#" class="text-light text-decoration-none">Return & Refund Policy</a>
+                    </p> {% endcomment %}
+                    <p class="small mb-1">
+                        <a href="#" class="text-light text-decoration-none">Terms & Conditions</a>
+                    </p>
+                    <p class="small mb-0">
+                        <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Get In Touch -->
+                <div class="col-md-3 mb-4 footer-column">
+                    <button class="footer-toggle d-md-none w-100 text-start" data-bs-toggle="collapse" data-bs-target="#footerContact">
+                    Get In Touch ▽
+                    </button>
+                    <div class="collapse d-md-block" id="footerContact">
+                    <h5 class="d-none d-md-block">Get In Touch</h5>
+                    <p class="small">
+                        <a href="{% url 'contact' %}#contact-cards" class="text-light text-decoration-none">Contact Us</a>
+                    </p>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+
+            <!-- Copyright Section -->
+            <div class="footer-bottom text-center py-3">
+                <p class="small mb-0">&copy; 2025 Rock Farms. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- =================== END FOOTER =================== -->
+
+       <!-- ========== FLOAT BUTTON ======== -->
+        <div class="fab-container">
+            <div class="fab-main" id="fabToggle">
+                <i class="bi bi-plus"></i>
+            </div>
+            <div class="fab-options" id="fabOptions">
+                <a href="tel:+233541094973" class="fab-option" title="Call Us">
+                <i class="bi bi-telephone-fill"></i>
+                </a>
+                <a href="https://wa.me/233541094973 " class="fab-option whatsapp" title="WhatsApp" target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                </a>
+                <a href="https://www.google.com/maps?q=Rock+Farms,+Accra,+Ghana" class="fab-option location" title="Locate Us" target="_blank">
+                <i class="bi bi-geo-alt-fill"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button id="backToTopBtn" title="Back to Top">
+            <i class="bi bi-arrow-up"></i>
+        </button>
+
+        <!-- Float Fab Container Button Script -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const fabToggle = document.getElementById("fabToggle");
+                const fabOptions = document.getElementById("fabOptions");
+
+                fabToggle.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent closing on toggle click
+                fabOptions.classList.toggle("show");
+                fabToggle.classList.toggle("active");
+
+                fabToggle.innerHTML = fabToggle.classList.contains("active")
+                    ? '<i class="bi bi-x"></i>'
+                    : '<i class="bi bi-plus"></i>';
+                });
+
+                // Close FAB if click happens outside
+                document.addEventListener("click", function (e) {
+                if (!e.target.closest(".fab-container")) {
+                    fabOptions.classList.remove("show");
+                    fabToggle.classList.remove("active");
+                    fabToggle.innerHTML = '<i class="bi bi-plus"></i>';
+                }
+                });
+            });
+        </script>
+
+        <!-- BACK TO TOP JS -->
+
+        <script>
+            (function () {
+                // run once, even if this block is included twice
+                if (window.backToTopInit) return;
+                window.backToTopInit = true;
+
+                const backToTopBtn = document.getElementById("backToTopBtn");
+
+                function toggleBtn() {
+                backToTopBtn.style.display =
+                    (document.body.scrollTop > 100 ||
+                    document.documentElement.scrollTop > 100)
+                    ? "block"
+                    : "none";
+                }
+
+                window.addEventListener("scroll", toggleBtn);
+                toggleBtn(); // initial state
+
+                backToTopBtn.addEventListener("click", () =>
+                window.scrollTo({ top: 0, behavior: "smooth" })
+                );
+            })();
+        </script>
+
+        <!--===== PAGE LOADER ===== -->
+        <script>
+            (function () {
+                const loader = document.querySelector(".page-loader");
+
+                // hide after 'load' OR 5‑second fallback
+                function hide() { loader.classList.add("fade-out"); }
+
+                window.addEventListener("load", hide);
+                setTimeout(hide, 5000);  // fallback
+            })();
+        </script>
+
+        <!--===== CACHING WISHLIST ===== -->
+        <script>
+            (function () {
+                // localStorage key
+                const KEY = "rockFarmsWishlist";
+
+                // Load current list or create empty
+                let wishlist = JSON.parse(localStorage.getItem(KEY) || "[]");
+
+                // Update all hearts on page
+                function refreshHearts() {
+                document.querySelectorAll(".fav-btn").forEach(btn => {
+                    const id = btn.dataset.productId;
+                    const icon = btn.querySelector("i");
+                    if (wishlist.includes(id)) {
+                    icon.classList.replace("bi-heart", "bi-heart-fill");
+                    icon.classList.add("text-danger");
+                    } else {
+                    icon.classList.replace("bi-heart-fill", "bi-heart");
+                    icon.classList.remove("text-danger");
+                    }
+                });
+
+                // badge
+                const badge = document.getElementById("wishlist-count");
+                if (badge) {
+                    badge.textContent = wishlist.length;
+                    badge.classList.toggle("d-none", wishlist.length === 0);
+                }
+                }
+
+                // Toggle handler
+                document.addEventListener("click", e => {
+                if (e.target.closest(".fav-btn")) {
+                    const btn = e.target.closest(".fav-btn");
+                    const id = btn.dataset.productId;
+                    if (wishlist.includes(id)) {
+                    wishlist = wishlist.filter(x => x !== id);
+                    } else {
+                    wishlist.push(id);
+                    }
+                    localStorage.setItem(KEY, JSON.stringify(wishlist));
+                    refreshHearts();
+                }
+                });
+
+                // Run once on load
+                refreshHearts();
+            })();
+        </script>
+
+        <!--===== LOAD MORE SHOP PRODUCTS LOGIC ===== -->
+        <script>
+            (function () {
+                const grid = document.getElementById("product-grid");
+                const loadBtn = document.getElementById("load-more-btn");
+                const nextLink = document.getElementById("next-page-link");
+
+                if (!grid || !loadBtn) return; // no grid (edge case)
+
+                async function loadMore() {
+                if (!nextLink) return;
+                loadBtn.disabled = true;
+                loadBtn.textContent = "Loading…";
+
+                try {
+                    const resp = await fetch(nextLink.href, { headers: { "X-Requested-With": "fetch" }});
+                    const html = await resp.text();
+                    // Parse returned HTML to extract new cards
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, "text/html");
+                    const newCards = doc.querySelectorAll("#productGrid .col");
+                    newCards.forEach(col => grid.appendChild(col));
+
+                    // Update next link or remove button
+                    const newNext = doc.getElementById("nextPageLink");
+                    if (newNext && newNext.getAttribute("href")) {
+                    nextLink.href = newNext.href;
+                    loadBtn.disabled = false;
+                    loadBtn.textContent = "Load More";
+                    } else {
+                    loadBtn.remove(); // no more pages
+                    }
+                } catch (err) {
+                    console.error(err);
+                    loadBtn.textContent = "Error";
+                }
+                }
+
+                // click-to-load
+                loadBtn.addEventListener("click", loadMore);
+
+                // auto-load on scroll near bottom
+                window.addEventListener("scroll", () => {
+                const rect = loadBtn.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 100) {
+                    loadMore();
+                }
+                }, { passive: true });
+            })();
+        </script>
+
+        {% block scripts %}{% endblock %}
+  
+    </body>
+</html>

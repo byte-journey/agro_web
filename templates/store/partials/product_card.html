@@ -1,0 +1,40 @@
+{%comment%}{% extends "base.html" %}{%endcomment%}
+{% load static %}
+
+<div class="card h-100 w-100 product-card position-relative" data-name="{{ product.name|lower }}">
+  <!-- Heart icon -->
+  <button type="button"
+          class="fav-btn btn btn-light btn-sm position-absolute top-0 end-0 m-1"
+          data-product-id="{{ product.id }}">
+    <i class="bi bi-heart"></i>
+  </button>
+
+  {% if show_category_badge %}
+    <span class="badge bg-success position-absolute m-2" style="z-index:1;">
+      {{ product.category.name }}
+    </span>
+  {% endif %}
+
+  <img src="{{ product.image.url }}" 
+  class="card-img-top p-2" alt="{{ product.name }}" loading="lazy">
+  
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name|truncatechars:25 }}</h5>
+    <p class="text-success">₵{{ product.price|floatformat:2 }}</p>
+
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'product-detail' product.pk %}" 
+      class="btn btn-sm btn-outline-secondary">Details</a>
+
+      <form action="{% url 'add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+        <!--<button type="submit" class="btn btn-sm btn-success">
+          <i class="bi bi-cart-plus"></i> Add
+        </button>-->
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

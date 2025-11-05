@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-3" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+      <h1>{{ product.name }}</h1>
+      <div class="mb-3">
+        <span class="h4 text-success">${{ product.price }}</span>
+        <span class="badge bg-{% if product.stock > 0 %}success{% else %}danger{% endif %} ms-2">
+          {{ product.stock|yesno:"In Stock,Out of Stock" }}
+        </span>
+      </div>
+      <form method="post" action="{% url 'add_to_cart' product.pk %}">
+        {% csrf_token %}
+        <div class="row g-3 align-items-center mb-4">
+          <div class="col-auto">
+            <input type="number" name="quantity" value="1" min="1" 
+                   max="{{ product.stock }}" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-success">
+              <!--<i class="bi bi-cart-plus"></i> Add to Cart-->
+            </button>
+          </div>
+        </div>
+      </form>
+      <h4>Description</h4>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+  
+  <!-- Related Products -->
+  <h3 class="mt-5">You May Also Like</h3>
+  <div class="row g-4">
+    {% for product in related_products %}
+    <div class="col-lg-3 col-md-6">
+      {% include 'store/partials/product_card.html' %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

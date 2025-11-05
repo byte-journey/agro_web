@@ -1,0 +1,26 @@
+# Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+*.sqlite3-journal
+
+# Virtual Environment
+farm_solution/
+venv/
+env/
+ENV/
+
+# Media & Collected Static
+media/
+staticFiles/
+
+# Logs & IDE
+*.log
+.vscode/
+.idea/
+.DS_Store
+
+# Environment
+.env
+local_settings.py

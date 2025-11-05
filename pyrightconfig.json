@@ -1,0 +1,5 @@
+{
+  "exclude": ["**/migrations"],
+  "pythonVersion": "3.8",
+  "typeCheckingMode": "basic"
+}
