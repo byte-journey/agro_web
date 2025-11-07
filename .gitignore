@@ -1,0 +1,50 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Django / Python
+*.sqlite3
+*.sqlite3-journal
+local_settings.py
+.env
+.env.* 
+.envrc
+.secret
+
+# Virtual environments
+venv/
+env/
+ENV/
+farm_solution/
+.FolderOfVenv/
+.venv/
+
+# Static & media
+staticFiles/
+media/
+# If you want to keep small sample images for README, put them in docs/ or sample_media/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build / dependency directories
+node_modules/
+dist/
+build/
+
+# Other
+.python-version
+coverage.*
