@@ -8,7 +8,7 @@ Includes product browsing, search, wishlist, cart system, and a clean user exper
 [![Django](https://img.shields.io/badge/Framework-Django-0C4B33?logo=django&style=for-the-badge)](https://www.djangoproject.com/)
 [![Bootstrap](https://img.shields.io/badge/UI-Bootstrap%205-563d7c?logo=bootstrap&style=for-the-badge)](https://getbootstrap.com/)
 [![PythonAnywhere](https://img.shields.io/badge/Hosting-PythonAnywhere-blue?logo=python&style=for-the-badge)](https://www.pythonanywhere.com/)
-[![GitHub](https://img.shields.io/badge/Repo-GitHub-black?logo=github&style=for-the-badge)](https://github.com/yourusername/agro_web)
+[![GitHub](https://img.shields.io/badge/Repo-GitHub-black?logo=github&style=for-the-badge)](https://github.com/byte-journey/agro_web)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 </div>
@@ -29,7 +29,7 @@ The project supports product listings, categories, search, user authentication, 
 ✅ Search with live suggestions (AJAX)  
 ✅ Wishlist (localStorage)  
 ✅ Cart + Checkout functionality  (Will be added in the future)  
-✅ User login & signup  (Will be added in the future)
+✅ User login & signup  (Will be added in the future)  
 ✅ SEO-friendly clean URLs  
 ✅ Mobile-friendly responsive design  
 
