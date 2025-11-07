@@ -28,7 +28,7 @@ The project supports product listings, categories, search, user authentication, 
 ✅ Category-based product filtering  
 ✅ Search with live suggestions (AJAX)  
 ✅ Wishlist (localStorage)  
-✅ Cart + Checkout functionality  (Will be added in the future)
+✅ Cart + Checkout functionality  (Will be added in the future)  
 ✅ User login & signup  (Will be added in the future)
 ✅ SEO-friendly clean URLs  
 ✅ Mobile-friendly responsive design  
@@ -49,20 +49,20 @@ The project supports product listings, categories, search, user authentication, 
 
 ## 📁 Project Structure
 
-agro_web/
-│
-├── config/ # Django project settings
-├── store/ # Main app: models, views, urls
-├── templates/ # HTML templates
-│ ├── store/
-│ ├── partials/
-│ ├── base.html
-│ └── navbar.html
-├── static/ # CSS + images for frontend
-├── media/ # Uploaded images (not in repo)
-├── staticFiles/ # collectstatic output (ignored)
-├── manage.py
-└── requirements.txt
+agro_web/  
+│  
+├── config/ # Django project settings  
+├── store/ # Main app: models, views, urls  
+├── templates/ # HTML templates  
+│ ├── store/  
+│ ├── partials/  
+│ ├── base.html  
+│ └── navbar.html  
+├── static/ # CSS + images for frontend  
+├── media/ # Uploaded images (not in repo)  
+├── staticFiles/ # collectstatic output (ignored)  
+├── manage.py  
+└── requirements.txt  
 
 ---
 
