@@ -85,7 +85,7 @@ python manage.py runserver
 
 ## 👨‍💻 Author
 
-**Gideon Gakpetor**
+**Gideon Gakpetor**  
 🔗 [GitHub:] https://github.com/byte-journey
 
 Passionate about Django, full-stack web development, and clean UI design.
