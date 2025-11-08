@@ -12,9 +12,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-heqc6ll*7=62yf&zmir=ahp!psbcyhi30d_nse!bai*9citq2q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False   # IMPORTANT
+# DEBUG = True
 
-ALLOWED_HOSTS = ["kg5.pythonanywhere.com"]
+# ALLOWED_HOSTS = []
+
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ["kg5.pythonanywhere.com"]
 
 
 # Application definition

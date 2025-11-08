@@ -78,4 +78,16 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
+```
+
+---
+
+
+## 👨‍💻 Author
+
+**Gideon Gakpetor**
+🔗 [GitHub:] https://github.com/yourusername
+
+Passionate about Django, full-stack web development, and clean UI design.
+
 
