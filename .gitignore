@@ -23,7 +23,7 @@ farm_solution/
 .venv/
 
 # Static & media
-staticFiles/
+staticfiles/
 media/
 # If you want to keep small sample images for README, put them in docs/ or sample_media/
 
@@ -48,3 +48,7 @@ build/
 # Other
 .python-version
 coverage.*
+
+# Ignore migration files except __init__.py
+**/migrations/*.py
+!**/migrations/__init__.py
