@@ -5,7 +5,8 @@
 
 <!-- Hero Carousel Section -->
 <section class="hero-carousel">
-  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+    
     <!-- Indicators -->
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
@@ -14,49 +15,54 @@
     </div>
     
     <!-- Slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner mb-5 mb-sw-3">
       <!-- Slide 1 -->
       <div class="carousel-item active">
-        <img src="{% static 'images/livestock.jpg' %}" class="d-block w-100" alt="Farm Fresh Produce">
+        <img src="{% static 'images/farm-bg.jpg' %}" class="d-block w-100" alt="Livestock">
         <div class="carousel-caption">
-          <!-- <img src="{% static 'images/tools.jpg' %}" alt="AgroMart" width="150" class="mb-3"> -->
-          <!-- <h1 class="display-4 fw-bold mb-3">Premium Agricultural Solutions</h1> -->
-          <!-- <p class="lead mb-4">Quality Tools for Modern Farmers</p> -->
-          <div class="d-flex gap-3 justify-content-center">
-            <a href="/shop/" class="btn btn-light btn-lg px-4">Shop Now</a>
-            <a href="#features" class="btn btn-outline-light btn-lg px-4">Learn More</a>
-          </div>
+          <h1 class="display-4 fw-bold mb-3">Premium Agricultural Solutions</h1>
         </div>
       </div>
       
       <!-- Slide 2 -->
       <div class="carousel-item">
-        <img src="{% static 'images/tools.jpg' %}" class="d-block w-100" alt="Healthy Livestock">
+        <img src="{% static 'images/livestock.jpg' %}" class="d-block w-100" alt="Tools">
         <div class="carousel-caption">
-          <!-- <h1 class="display-4 fw-bold mb-3">Healthy Livestock Supplies</h1>
-          <p class="lead mb-4">Veterinary Products & Nutrition</p> -->
-          <a href="/shop/?category=livestock" class="btn btn-light btn-lg px-4">Browse Livestock</a>
+          <h1 class="display-4 fw-bold mb-3">Healthy Livestock Supplies</h1>
+          <!---<a href="/shop/?category=livestock" class="btn btn-light btn-lg px-4">Browse Livestock</a>-->
         </div>
       </div>
       
       <!-- Slide 3 -->
       <div class="carousel-item">
-        <img src="{% static 'images/farm-bg.jpg' %}" class="d-block w-100" alt="Farm Equipment">
+        <img src="{% static 'images/tools.jpg' %}" class="d-block w-100" alt="Farm Equipment and Products">
         <div class="carousel-caption">
-          <!-- <h1 class="display-4 fw-bold mb-3">Professional Farm Equipment</h1>
-          <p class="lead mb-4">Tools for Every Agricultural Need</p> -->
-          <a href="/shop/?category=tools" class="btn btn-light btn-lg px-4">View Equipment</a>
+          <h1 class="display-4 fw-bold mb-3">Professional Equipment <br>and Products</h1>
+          <!--<p class="lead mb-4">Tools for Every Agricultural Need</p> -->
+          <!--<a href="/shop/?category=tools" class="btn btn-light btn-lg px-4">View Equipment</a>-->
         </div>
       </div>
     </div>
-    
+
+    <!-- Fixed Buttons – ALWAYS ON TOP -->
+    <div class="fixed-overlay position-absolute top-50 start-50 translate-middle text-center w-100 px-4 align-items-center" 
+          style="z-index: 20; margin-top: 80px; transform: translateY(-50%);">
+
+      <div class="buttons-container d-flex flex-column flex-sm-row gap-3 gap-sm-4 justify-content-center align-items-center flex-wrap animate__animated animate__fadeInUp" 
+          style="animation-delay: 0.5s;">
+
+        <a href="/shop/" class="btn btn-light shadow-lg fw-bold flex-fill flex-sm-grow-0 btn-lg px-4 py-2">Shop Now</a>
+        <a href="#features" class="btn btn-outline-light fw-bold flex-fill flex-sm-grow-0 btn-lg px-4 py-2 shadow-lg">Learn More</a>
+      </div>
+    </div>  
+
     <!-- Controls -->
     <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="carousel-control-prev-icon"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
@@ -135,7 +141,7 @@
 
 <!-- Featured Products Quick View -->
 <section class="container my-5">
-  <h2 class="section-title m-3">Featured Products</h2>
+  <h2 class="section-title m-3 fw-bold">Featured Products</h2>
 
   <div class="scrolling-wrapper d-flex flex-nowrap overflow-auto">
     {% for product in featured_products %}
@@ -165,7 +171,7 @@
         {% for category in categories %}
         <div class="col-md-6">
           <a href="{% url 'category-view' categories.0.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 text-white category-vet-drugs">
+            <div class="category-card col rounded-3 text-white category-vet-drugs">
               <h4>Veterinary Drugs</h4>
             </div>
           </a>
@@ -173,7 +179,7 @@
         {% endfor %}
         <div class="col-md-6">
           <a href="{% url 'category-view' categories.1.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 bg-dark text-white category-agro-seedlings">
+            <div class="category-card col rounded-3 bg-dark text-white category-agro-seedlings">
               <h4>Agro Seedlings</h4>
             </div>
           </a>
@@ -184,7 +190,7 @@
       <div class="row mb-3">
         <div class="col-12">
           <a href="{% url 'category-view' categories.2.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 bg-dark text-white category-spraying-machines">
+            <div class="category-card col rounded-3 bg-dark text-white category-spraying-machines">
               <h4>Spraying Machines</h4>
             </div>
           </a>
@@ -195,14 +201,14 @@
       <div class="row g-3 mb-3">
         <div class="col-md-6">
           <a href="{% url 'category-view' categories.3.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 bg-dark text-white category-agro-chemicals">
+            <div class="category-card col rounded-3 bg-dark text-white category-agro-chemicals">
               <h4>Agro Chemicals</h4>
             </div>
           </a>
         </div>
         <div class="col-md-6">
           <a href="{% url 'category-view' categories.4.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 bg-dark text-white category-fertilizers">
+            <div class="category-card col rounded-3 bg-dark text-white category-fertilizers">
               <h4>Fertilizers</h4>
             </div>
           </a>
@@ -213,7 +219,7 @@
        <div class="row">
         <div class="col-12">
           <a href="{% url 'category-view' categories.5.slug %}" class="text-decoration-none">
-            <div class="category-box col rounded-3 bg-dark text-white category-livestock">
+            <div class="category-card col rounded-3 bg-dark text-white category-livestock">
               <h4>Livestocks</h4>
             </div>
           </a>
@@ -223,17 +229,27 @@
 </section> {% endcomment %}
 
 <!-- Categories Section -->
-<section class="categories-section bg-light py-2">
+<section class="categories-section bg-light py-5">
   <div class="container">
-    <h2 class="text-center mb-5">Our Categories</h2>
+    <h2 class="text-center mb-5 fw-bold display-5">Our Categories</h2>
 
-    <div class="row g-3">
+    <div class="row g-4">
       {% for category in categories %}
       <div class="col-md-6">
-        <a href="{% url 'category-view' category.slug %}" class="text-decoration-none">
-          <div class="category-box col rounded-3 text-white"
+        <a href="{% url 'category-view' category.slug %}" class="text-decoration-none category-link d-block">
+          <div class="category-card col rounded-3 position-relative overflow-hidden rounded-4 shadow-lg"
                 style="background-image:url('{{ category.image.url }}');">
-            <h4>{{ category.name }}</h4>
+
+            <!-- Background Image -->
+            <div class="category-image position-absolute top-0 start-0 w-100 h-100">
+              <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-100 h-100">
+            </div>
+
+            <!-- Overlay + Text (Centered) -->
+            <div class="category-overlay position-absolute w-100 px-4">
+              <!--<h4 class="category-title text-white fw-bold mb-0">{{ category.name }}</h4>-->
+            </div>
+            <h4 class="category-title text-white fw-bold mb-0">{{ category.name }}</h4>
           </div>
         </a>
       </div>

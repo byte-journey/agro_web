@@ -13,9 +13,11 @@
         <!-- Load static files -->
         <link  rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/contact.css' %}">
-        <!-- font -->
+        <!-- Font -->
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+        <!-- Ajax Animate CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
         <style>
             html {
@@ -81,6 +83,11 @@
                 0% { transform: scale(1); }
                 50% { transform: scale(1.1); }
                 100% { transform: scale(1); }
+            }
+
+            /* Reset animation on slide change */
+            .carousel-item {
+                animation: none !important;
             }
         </style>
 
@@ -372,6 +379,24 @@
                 }
                 }, { passive: true });
             })();
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.category-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+                });
+            }, { threshold: 0.5 });
+
+            cards.forEach(card => observer.observe(card));
+            });
         </script>
 
         {% block scripts %}{% endblock %}

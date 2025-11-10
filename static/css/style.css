@@ -189,17 +189,6 @@ footer.footer-section {
 }
 
 
-
-/* =============== Responsive Layouts ===============*/
-
-
-@media (min-width: 768px) {
-  .footer-toggle {
-    display: none;
-  }
-}
-
-
 /* =========== FLOAT BUTTONS ============ */
 .fab-container {
   position: fixed;
@@ -300,6 +289,9 @@ footer.footer-section {
 /* ========== HERO SECTION ========== */
 
 .hero-carousel {
+  height: 90vh;
+  min-height: 500px;
+  overflow: hidden;
   position: relative;
 }
 
@@ -307,6 +299,8 @@ footer.footer-section {
   height: 90vh; /* Full viewport height */
   min-height: 500px;
   max-height: 800px;
+  background: #000;
+  position: relative;
 }
 
 .hero-carousel .carousel-item img {
@@ -314,6 +308,12 @@ footer.footer-section {
   height: 100%;
   width: 100%;
   filter: brightness(0.6); /* Darken image for better text contrast */
+  transition: transform 8s ease, filter 1.5s ease;
+  transform: scale(1.05);
+}
+
+.carousel-item.active img {
+  transform: scale(1.12);
 }
 
 .hero-carousel .carousel-caption {
@@ -381,60 +381,61 @@ footer.footer-section {
   transform: scale(1.2);
 }
 
+/* Smooth fade + subtle zoom */
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+
+/* FIXED OVERLAY – NEVER FADES */
+.fixed-overlay {
+  pointer-events: none;
+}
+.fixed-overlay * {
+  pointer-events: auto;
+}
+
+/* BUTTON HOVER */
+.fixed-overlay .btn {
+  transition: all 0.35s ease;
+  border: 2px solid white;
+}
+
+.fixed-overlay .btn:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+}
+
+/* Caption text animation */
+.carousel-caption h1 {
+  animation: fadeInUp 1.2s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.carousel-item.active .carousel-caption h1 {
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+/* Zoom-in effect on active slide */
+.carousel-item.active img {
+  transform: scale(1.08);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Shop Page Search Blur Overlay Style */
 .blur-sm {
   filter: blur(2px);
 }
-
-/* Responsive adjustments */
-
-@media (max-width: 992px) {
-  .hero-carousel h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-carousel .lead {
-    font-size: 1.25rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-carousel .carousel-item {
-    height: 70vh;
-    min-height: 400px;
-  }
-  
-  .hero-carousel h1 {
-    font-size: 2rem;
-  }
-  
-  .hero-carousel .lead {
-    font-size: 1.1rem;
-  }
-  
-  .hero-carousel .btn {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .hero-carousel .carousel-caption {
-    padding: 0 0.5rem;
-  }
-  
-  .hero-carousel h1 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-  }
-  
-  .hero-carousel .btn {
-    display: block;
-    width: 80%;
-    margin: 0.5rem auto;
-  }
-}
-
 
 
 /* ========== FEATURES SECTION ========== */
@@ -465,13 +466,6 @@ footer.footer-section {
 .feature-card h3 {
   color: #2c7744;
   font-weight: 600;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .feature-card {
-    margin-bottom: 1rem;
-  }
 }
 
 
@@ -524,8 +518,8 @@ footer.footer-section {
 
 
 /* ========== CATEGORIES SECTION ========== */
-.category-box {
-  position: relative; /* Make sure we can absolutely position overlays inside */
+.category-card {
+  /*position: relative; 
   background-size: cover;
   background-position: center;
   color: white;
@@ -536,10 +530,22 @@ footer.footer-section {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg); */
+
+  height: 320px;
+  color: white;
+  padding: 1.5rem;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+  border-radius: 1rem !important;
+  overflow: hidden;
 }
 
 /* Semi-transparent green full-overlay */
-.category-box::before {
+.category-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
@@ -554,12 +560,44 @@ footer.footer-section {
   transition: background 0.3s ease;
 }
 
+.category-image {
+  transition: transform 10s ease;
+}
+
+.category-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 10s ease;
+}
+
 /* Ensure text is above both overlays */
-.category-box h4 {
+.category-card h4 {
   position: relative;
   z-index: 3;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+/* Hover = PURE MAGIC */
+.category-link:hover .category-card {
+  transform: perspective(1200px) rotateY(8deg) rotateX(5deg) scale(1.05);
+  box-shadow: 0 40px 80px rgba(44,119,68,0.5) !important;
+}
+
+.category-link:hover .category-image img {
+  transform: translateX(-20%) scale(1.5);
+}
+
+.category-link:hover .category-overlay {
+  background: radial-gradient(circle at 30% 30%, rgba(44,119,68,0.9), rgba(34,139,34,0.8));
+}
+
+.category-link:hover .category-title {
+  transform: translateY(-8px);
+  text-shadow: 0 6px 25px rgba(0,0,0,0.9);
+  letter-spacing: 2px;
+  transition: all 0.8s ease;
 }
 
 /* ========== SHOP PAGE ========== */
@@ -576,21 +614,6 @@ footer.footer-section {
   position: sticky;
   top: 0px;        /* height of your navbar (adjust if different) */
   z-index: 1020;    /* above main content, below navbar */
-}
-
-/* Chip buttons wrap cleanly */
-@media (max-width: 575.98px) {
-  .btn-sm {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) { /* tablets */
-  .shop-grid-container {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
 }
 
 
@@ -614,3 +637,210 @@ footer.footer-section {
 
 
 /* ========== RESPONSIVE ADJUSTMENTS ========== */
+
+.fixed-overlay .buttons-container {
+  max-width: 100%;
+}
+
+/* Medium phones (361px – 576px) */
+.fixed-overlay .btn {
+  padding: 0.75rem 1.8rem !important;
+  font-size: 1rem !important;
+  min-width: 140px;
+  border: 2.5px solid white !important;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.35s ease;
+}
+
+
+
+/* Very small screens (≤360px) */
+@media (max-width: 360px) {
+  .fixed-overlay {
+    top: 62% !important;
+  }
+  
+  .fixed-overlay .btn {
+    padding: 0.65rem 1.4rem !important;
+    font-size: 0.95rem !important;
+    min-width: 130px;
+    font-weight: 600;
+  }
+  
+  .buttons-container {
+    gap: 0.75rem !important;
+  }
+
+  .hero-carousel{
+    padding-bottom: 120px;
+  }
+
+  .category-card {
+    height: 200px !important; /* YOU ASKED: smaller on mobile */
+  }
+}
+
+/* Small phones (361px – 480px) */
+@media (min-width: 361px) and (max-width: 480px) {
+  .fixed-overlay .btn {
+    padding: 0.8rem 2rem !important;
+    font-size: 1.05rem !important;
+  }
+
+  .hero-carousel{
+    padding-bottom: 120px;
+  }
+
+  .category-card {
+    height: 200px !important; /* YOU ASKED: smaller on mobile */
+  }
+}
+
+@media (max-width: 568px) {
+  
+  .fixed-overlay a {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .category-card {
+    height: 220px !important; /* YOU ASKED: smaller on mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-carousel .carousel-caption {
+    padding: 0 0.5rem;
+  }
+  
+  .hero-carousel h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-carousel .btn {
+    display: block;
+    width: 80%;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .category-card {
+    height: 250px !important; /* YOU ASKED: smaller on mobile */
+  }
+}
+
+/* Chip buttons wrap cleanly */
+@media (max-width: 575.98px) {
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .hero-carousel .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .category-card {
+    height: 260px !important; /* YOU ASKED: smaller on mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { /* tablets */
+  .shop-grid-container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .hero-carousel h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-carousel .lead {
+    font-size: 1.25rem;
+  }
+
+  .fixed-overlay .btn {
+    padding: 1rem 2.8rem !important;
+    font-size: 1.15rem !important;
+  }
+
+  .category-card {
+    height: 200px !important; /* YOU ASKED: smaller on mobile */
+  }
+  
+  .category-title {
+    font-size: 1.4rem;
+  }
+
+  /* Scroll trigger animation */
+  .category-card {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.95);
+    opacity: 0.8;
+  }
+
+  .category-card.in-view {
+    animation: tiltIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes tiltIn {
+    0% {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.95);
+      opacity: 0.8;
+    }
+    100% {
+      transform: perspective(1000px) rotateY(4deg) rotateX(3deg) scale(1);
+      opacity: 1;
+      box-shadow: 0 20px 40px rgba(44,119,68,0.4);
+    }
+  }
+
+  /* Pan image on scroll-in */
+  .category-card.in-view {
+    background-position: 70% center !important;
+    transition: background-position 8s ease;
+  }
+
+  .footer-toggle {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+
+  .hero-carousel {
+    height: 75vh;
+    min-height: 480px;
+  }
+
+  .hero-carousel .carousel-item {
+    height: 70vh;
+    min-height: 400px;
+  }
+  
+  .hero-carousel h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-carousel .lead {
+    font-size: 1.1rem;
+  }
+  
+  .hero-carousel .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .fixed-overlay h1 {
+    font-size: 2.5rem !important;
+  }
+
+  .fixed-overlay .btn {
+    padding: 0.75rem 2rem !important;
+    font-size: 1rem;
+  }
+}
