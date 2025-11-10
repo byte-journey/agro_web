@@ -18,10 +18,11 @@ SECRET_KEY = 'django-insecure-heqc6ll*7=62yf&zmir=ahp!psbcyhi30d_nse!bai*9citq2q
 
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 
-if DEBUG:
-    ALLOWED_HOSTS = []
-else:
-    ALLOWED_HOSTS = ["kg5.pythonanywhere.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "kg5.pythonanywhere.com",
+]
 
 
 # Application definition
